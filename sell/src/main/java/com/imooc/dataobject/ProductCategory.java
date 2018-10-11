@@ -1,6 +1,8 @@
 package com.imooc.dataobject;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
  * Created by weikaixiang on 2018/10/7 0007.
  */
 @Entity
+@DynamicUpdate  //此注解可以自动更改数据库时间字段的值
 @Data
 public class ProductCategory {
     /** 加入一些注解使数据库映射为对象@Entity等
