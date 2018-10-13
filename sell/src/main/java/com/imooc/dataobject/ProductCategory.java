@@ -23,8 +23,12 @@ public class ProductCategory {
     private Integer categoryId;
     private String categoryName;
     private Integer categoryType;
-    public void setCategoryType(Integer categoryType) {
+
+    public ProductCategory(String categoryName, Integer categoryType) {
+        this.categoryName = categoryName;
         this.categoryType = categoryType;
+    }
+    public ProductCategory(){
     }
 
     @Override
