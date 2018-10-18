@@ -18,7 +18,7 @@ public interface ProductService {
 
     List<ProductInfo> findUpAll();
 
-    List<ProductInfo> findAll(Pageable pageable);
+    Page<ProductInfo> findAll(Pageable pageable);
 
     ProductInfo save(ProductInfo productInfo);
     //加库存
