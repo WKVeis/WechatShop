@@ -22,13 +22,13 @@ public class OrderDetailRepositoryTest {
     @Autowired
     private OrderDetailRepository repository;
     @Test
-    public  void saveTest(){
+    public void saveTest(){
         OrderDetail orderDetail=new OrderDetail();
         orderDetail.setOrderId("148");
-        orderDetail.setDetailId("1213");
+        orderDetail.setDetailId("1212");
         orderDetail.setProductIcon("jjj");
         orderDetail.setProductId("222");
-        orderDetail.setProductName("大萝卜");
+        orderDetail.setProductName("大萝卜02");
         orderDetail.setProductPrice(new BigDecimal(33.2));
         orderDetail.setProductQuantity(333);
         OrderDetail result = repository.save(orderDetail);

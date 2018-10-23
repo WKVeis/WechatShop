@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 /**
- * Created by Administrator on 2018/10/22.
+ * Created by weikaixiang on 2018/10/22.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
