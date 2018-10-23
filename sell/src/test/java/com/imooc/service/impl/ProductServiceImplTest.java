@@ -48,8 +48,8 @@ public class ProductServiceImplTest {
     @Test
     public void save() throws Exception {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId("8900");
-        productInfo.setProductName("果皮尖椒");
+        productInfo.setProductId("8901");
+        productInfo.setProductName("果皮尖椒3");
         productInfo.setProductPrice(new BigDecimal(3.2));
         productInfo.setProductStock(100);
         productInfo.setProductDescription("BigDecimal类型的字段要注意了");
