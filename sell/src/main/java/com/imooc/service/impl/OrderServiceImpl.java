@@ -5,6 +5,8 @@ import com.imooc.dataobject.OrderMaster;
 import com.imooc.dataobject.ProductInfo;
 import com.imooc.dto.CartDTO;
 import com.imooc.dto.OrderDTO;
+import com.imooc.enums.OrderStatusEnum;
+import com.imooc.enums.PayStatusEnum;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.repository.OrderDetailRepository;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -52,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
             BigDeciaml特有的乘法
              orderDetail.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity()))为一件商品总价
              **/
-            orderAmount = orderDetail.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity()))
+            orderAmount = productInfo.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity()))
                     .add(orderAmount);
 
             //订单详情入库
@@ -66,9 +69,11 @@ public class OrderServiceImpl implements OrderService {
         }
         // 写入数据库
         OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
-        BeanUtils.copyProperties(orderDTO, orderMaster);
+        orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
+        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
         orderMasterRepository.save(orderMaster);
         //扣库存
         //使用java8新方法lambada返回一个集合，前面提到过
@@ -80,7 +85,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findByOne(String orderId) {
-        return null;
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        if(orderMaster ==null){
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        List<OrderDetail> orderDetailList=orderDetailRepository.findByOrderId(orderId);
+        if(CollectionUtils.isEmpty(orderDetailList)){
+            throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
+        }
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(orderMaster, orderDTO);
+        orderDTO.setOrderDetailList(orderDetailList);
+        return orderDTO;
     }
 
     @Override
