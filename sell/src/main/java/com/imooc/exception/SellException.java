@@ -7,9 +7,12 @@ import com.imooc.enums.ResultEnum;
  */
 public class SellException extends RuntimeException {
     private Integer code;
-
     public SellException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());//把message里面的内容传到父类（super)的构造方法中去
         this.code=resultEnum.getCode();
+    }
+    public SellException(Integer code,String message){
+        super(message);
+        this.code=code;
     }
 }
