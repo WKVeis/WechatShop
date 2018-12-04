@@ -29,8 +29,8 @@ import static org.junit.Assert.*;
 public class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
-    private final String BUYER_OPENID = "1212";
-    private final String ORDER_ID="1541056721634709246";
+    private final String BUYER_OPENID = "99999";
+    private final String ORDER_ID="1543940165795810634";
     @Test
     public void create() throws Exception {
         OrderDTO orderDTO = new OrderDTO();
@@ -41,8 +41,8 @@ public class OrderServiceImplTest {
         // 购物车
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
-        o1.setProductId("8901");
-        o1.setProductQuantity(1);
+        o1.setProductId("890");
+        o1.setProductQuantity(3);
         orderDetailList.add(o1);
         orderDTO.setOrderDetailList(orderDetailList);
         OrderDTO result = orderService.create(orderDTO);
@@ -64,7 +64,7 @@ public class OrderServiceImplTest {
     @Test
     public void cancel() throws Exception {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
-        OrderDTO result = orderService.finish(orderDTO);
+        OrderDTO result = orderService.cancel(orderDTO);
         Assert.assertNotEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 

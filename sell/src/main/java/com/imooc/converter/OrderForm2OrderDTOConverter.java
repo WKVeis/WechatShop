@@ -25,7 +25,7 @@ public class OrderForm2OrderDTOConverter {
         orderDTO.setBuyerAddress(orderForm.getAddress());
         orderDTO.setBuyerOpenid(orderForm.getOpenid());
         List<OrderDetail> orderDetailList = new ArrayList<>();
-        //这里不能用BeanUtil的cope方法,因为OrderDTO和OrderForm里面的字段不一样
+            //这里不能用BeanUtil的cope方法,因为OrderDTO和OrderForm里面的字段不一样
         //将json转换一个List集合，用到的方法fromJson<String,Type>
         try {
             orderDetailList=gson.fromJson(orderForm.getItems(),
