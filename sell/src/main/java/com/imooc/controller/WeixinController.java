@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/weixin")
 public class WeixinController {
     @GetMapping("/auth")
-    public void auth(@RequestParam("code") String code) {
+    public void auth(){
         log.info("获取授权code的auth方法");
-        log.info("code={}", code);
 
+    }
+    @GetMapping("/auth1")
+    public void auth1(@RequestParam("code") String code) {
+        log.info("code={}", code);
     }
 }
