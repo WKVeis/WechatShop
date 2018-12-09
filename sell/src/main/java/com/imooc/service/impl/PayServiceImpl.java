@@ -33,8 +33,8 @@ public class PayServiceImpl implements PayService {
         payRequest.setOrderName(ORDER_NAME);
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
         log.info("【微信支付】request={}", JsonUtil.toJson(payRequest) );
-        bestPayService.pay(payRequest);
-        PayResponse payResponse = new PayResponse();
+
+        PayResponse payResponse =bestPayService.pay(payRequest) ;
         log.info("【微信支付】reponse={}", JsonUtil.toJson(payResponse));
     }
 }
