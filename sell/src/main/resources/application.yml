@@ -12,6 +12,11 @@ server:
 wechat:
       mpAppId: wxd898fcb01713c658
       mpAppSecret: 29d8a650db31472aa87800e3b0d739f2
+      mchId:
+      mchKey:
+      mchPath: /var/weixin_cert/h5.p12
+      notifyUrl: 域名/sell/pay/notify
+# notifuUrl是支付的异步通知，非常重要
 #logging:
  #   patter n:
   #      console: "%d - %msg%n"
